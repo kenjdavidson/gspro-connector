@@ -1,4 +1,4 @@
-package kjd.gspro.api.client;
+package kjd.gspro.api;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,6 +44,14 @@ public class Publisher<T> implements Flow.Publisher<T> {
         for (Map.Entry<Flow.Subscriber<? super T>,Long> entry : subscribers.entrySet()) {
             entry.getKey().onError(t);
         }
+    }
+
+    public void complete() {
+        for (Map.Entry<Flow.Subscriber<? super T>,Long> entry : subscribers.entrySet()) {
+            entry.getKey().onComplete();
+        }
+
+        subscribers.clear();
     }
 
     public class Subscription implements Flow.Subscription {

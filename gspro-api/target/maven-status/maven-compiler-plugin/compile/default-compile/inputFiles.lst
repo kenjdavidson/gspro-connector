@@ -1,0 +1,16 @@
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/Request.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/v1/Json.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/data/Hand.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/Client.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/data/BallData.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/data/Options.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/data/Units.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/v1/ClientImpl.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/Publisher.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/Status.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/data/Club.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/ConnectionException.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/data/Player.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/v1/RequestBuilder.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/data/ClubData.java
+/workspaces/gspro-bridge/gspro-api/src/main/java/kjd/gspro/api/v1/ConnectionImpl.java

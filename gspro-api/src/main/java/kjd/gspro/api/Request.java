@@ -6,10 +6,9 @@ import kjd.gspro.data.BallData;
 import kjd.gspro.data.ClubData;
 import kjd.gspro.data.Options;
 import kjd.gspro.data.Units;
-import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.Setter;
 
 /**
  * Message for communicate from the monitor to the GS Pro.
@@ -21,59 +20,38 @@ import lombok.Setter;
  * 
  * @author kenjdavidson
  */
+@Data
+@Builder
 public class Request {
 
-    @Getter
+    @NonNull
     @JsonProperty("DeviceID")
     private String deviceId;  
 
-    @Getter
-    @Setter
+    @NonNull
     @JsonProperty("Units")
     private Units units;
 
-    @Getter
-    @Setter(AccessLevel.PACKAGE)
-    @JsonProperty("ShotNumber")
-    private Integer shotNumber; 
-
-    @Getter
-    @Setter(AccessLevel.PACKAGE)
+    @NonNull
     @JsonProperty("APIVersion")
     private String version;
 
-    @Getter
+    /**
+     * Required for shots/club, but not heartbeat?
+     */
+    @JsonProperty("ShotNumber")
+    private Integer shotNumber; 
+
+
     @JsonProperty("BallData")
     private BallData ballData;
 
-    @Getter
     @JsonProperty("ClubData")
     private ClubData clubData;
 
-    @Getter
     @NonNull
     @JsonProperty("ShotDataOptions")
     private Options shotDataOptions;
-
-    public Request(String deviceId, Integer shotNumber) {
-        this(deviceId, shotNumber, null, null);
-    }
-
-    public Request(String deviceId, Integer shotNumber, BallData ballData) {
-        this(deviceId, shotNumber, ballData, null);
-    }
-
-    public Request(String deviceId, Integer shotNumber, ClubData clubData) {
-        this(deviceId, shotNumber, null, clubData);
-    }
-
-    public Request(String deviceId, Integer shotNumber, BallData ballData, ClubData clubData) {
-        this.deviceId = deviceId;
-        this.shotNumber = shotNumber;  
-        this.shotDataOptions = new Options();
-        this.setBallData(ballData);
-        this.setClubData(clubData);
-    }
 
     public void setBallData(BallData data) {
         this.ballData = data;

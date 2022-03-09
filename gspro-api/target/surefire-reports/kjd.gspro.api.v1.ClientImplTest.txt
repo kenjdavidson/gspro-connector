@@ -1,0 +1,25 @@
+-------------------------------------------------------------------------------
+Test set: kjd.gspro.api.v1.ClientImplTest
+-------------------------------------------------------------------------------
+Tests run: 14, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.252 s <<< FAILURE! - in kjd.gspro.api.v1.ClientImplTest
+testSubscribe(kjd.gspro.api.v1.ClientImplTest)  Time elapsed: 0.115 s  <<< FAILURE!
+org.mockito.exceptions.verification.WantedButNotInvoked: 
+
+Wanted but not invoked:
+publisher.complete();
+-> at kjd.gspro.api.v1.ClientImplTest.testSubscribe(ClientImplTest.java:179)
+
+However, there were other interactions with this mock:
+publisher.publish(
+    Status(code=100, message=Connecting to GS Pro..., player=null, connected=false)
+);
+-> at kjd.gspro.api.v1.ClientImpl.connect(ClientImpl.java:88)
+
+publisher.publish(
+    Status(code=100, message=Connected to GS Pro!, player=null, connected=true)
+);
+-> at kjd.gspro.api.v1.ClientImpl.connect(ClientImpl.java:88)
+
+
+	at kjd.gspro.api.v1.ClientImplTest.testSubscribe(ClientImplTest.java:179)
+

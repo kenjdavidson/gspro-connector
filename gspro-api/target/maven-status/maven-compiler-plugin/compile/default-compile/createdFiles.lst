@@ -1,11 +1,9 @@
 kjd/gspro/data/Hand.class
-kjd/gspro/api/Response.class
 kjd/gspro/data/BallData.class
 kjd/gspro/api/Request.class
 kjd/gspro/data/ClubData.class
 kjd/gspro/api/Client.class
 kjd/gspro/data/Options$OptionsBuilder.class
-kjd/gspro/api/Client$Connection.class
 kjd/gspro/api/Status.class
 kjd/gspro/data/Club.class
 kjd/gspro/api/ConnectionException.class

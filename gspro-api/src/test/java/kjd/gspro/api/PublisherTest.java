@@ -1,4 +1,4 @@
-package kjd.gspro.api.client;
+package kjd.gspro.api;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -15,8 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import kjd.gspro.api.Status;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PublisherTest {
