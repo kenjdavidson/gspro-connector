@@ -1,7 +1,5 @@
-package kjd.gspro.api.v1;
+package kjd.gspro.api;
 
-import kjd.gspro.api.Client;
-import kjd.gspro.api.Request;
 import kjd.gspro.data.BallData;
 import kjd.gspro.data.ClubData;
 import kjd.gspro.data.Options;

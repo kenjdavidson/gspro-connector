@@ -1,68 +1,149 @@
 package kjd.gspro.api;
 
+import java.io.IOException;
 import java.util.concurrent.Flow;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import lombok.Getter;
+
 /**
- * GS Pro Open Connect client.
+ * {@link Client} implementation for communication with the GS Pro Open Connect V1 protocol.
+ * <p>
  * 
  * @author kenjdavidson
  */
-public interface Client {
+public class Client implements Flow.Publisher<Status> {
+    
+    public static final String DEFAULT_HOST = "127.0.0.1";
+    public static final Integer DEFAULT_PORT = 921;
+    public static final Integer DEFAULT_TIMEOUT = 300;
+
+    private Logger logger = LoggerFactory.getLogger(Client.class);
+
+    @Getter
+    private String host;
+
+    @Getter
+    private Integer port;
+
+    @Getter 
+    private Integer timeout;
+
+    private Connection connection;
+
+    @Getter
+    private Publisher<Status> statusPublisher;
+
+    public Client() {
+        this(DEFAULT_HOST, DEFAULT_PORT);
+    }
+
+    public Client(String host) {
+        this(host, DEFAULT_PORT);
+    }
+
+    public Client(String host, Integer port) {
+        this(host, port, DEFAULT_TIMEOUT);
+    }
+
+    public Client(String host, Integer port, Integer timeout) {
+        this.host = host;
+        this.port = port;
+        this.timeout = timeout;
+
+        this.statusPublisher = new Publisher<>();
+    }
 
     /**
-     * Whether the {@link Client} is has an active connection to the
-     * api.
+     * Whether we have an active connection to the GS Pro Open Connect V1 server.
      * 
-     * @return whether there is an active connections
+     * @return
      */
-    boolean isConnected();
+    public boolean isConnected() {
+        return connection != null && connection.isConnected();
+    }
 
     /**
-     * Attempt to connect.  
+     * Request a connection to the GS Pro Open Connect V1 server.  The client must be subscribed
+     * to in order to get status updates and responses.
      * 
-     * @return the {@link Client} once a connect has been established
-     * @throws ConnectionException if an error occurs during connection
+     * @return the {@link ClientTest} once the connection is started
      */
-    Client connect() throws ConnectionException;
-  
-    /**
-     * Attempt to cancel.
-     * 
-     * @return the {@link Client} once the request is completed
-     * @throws ConnectionException if not currently connected
-     */
-    Client cancel() throws ConnectionException;
+    public void connect() throws ConnectionException {
+        if (isConnected()) 
+            throw new ConnectionException("Client is already connected to the GS Pro Connect Api");
+
+        connection = createConnection();
+        connection.start();
+    }
 
     /**
-     * Subscribe to the client to receive {@link Status} updates from the
-     * GS Pro.  Status messages include:
-     * <ul>
-     *  <li>Successful shot data</li>
-     *  <li>Player change information</li>
-     *  <li>Errors</li>
-     *  <li>Connection Information</li>
-     * </ul>
-     * Note - that the connection information is not part of the Conenct API
-     * but the client (just to help manage user experience).
-     * 
-     * @param subscriber {@link Flow.Subscriber} used for messages
-     */
-    void subscribe(Flow.Subscriber<? super Status> subscriber);
-
-    /**
-     * Sends a {@link Request} to the GS Pro.  This request can be either
-     * a heartbeat or shot/club details.  There are no results as the API doesn't 
-     * provide a method for matching responses (unless they assume the next message)
-     * is in response to the most recent message sent (which I wouldn't assume with
-     * two way sockets).
+     * Requests that the client disconnects from the GS Pro Open Connect V1 server.  This may not happen
+     * right away; the Subscriptions are still valid and should be monitored for successful disconnect.
      * <p>
-     * It looks like a Python implementation of GS Pro assumes this, although at
-     * this point I'm going to leave it up to the user to subscribe for these 
-     * messages instead.
+     * Look into updating this so that cancel returns a `Future` or `join` with the connection thread
+     * to make sure it's completely shut down.
      * 
-     * @param request the heartbeat or shot request
-     * @throws ConnectionException if not currently connected
+     * @return the {@link ClientTest}
+     * @throws InterruptedException
      */
-    boolean send(Request request) throws ConnectionException;
+    public void disconnect() throws ConnectionException {
+        validateConnection();
+
+        connection.disconnect();
+        connection = null;
+    }    
+
+    /**
+     * Subscription to start receiving Status (and response) messages from the 
+     * GS Pro software.
+     * 
+     * @param subscriber Status subscriber
+     */
+    @Override
+    public void subscribe(Flow.Subscriber<? super Status> subscriber) {
+        statusPublisher.subscribe(subscriber);
+    }
+
+    /**
+     * Send a message to the GS Pro.  Requests should be pre-generated by the monitor
+     * adapter/bridge either manually or using the {@link RequestBuilder}.
+     * 
+     * @param request the {@link Request} to send
+     */
+	public boolean send(Request request) throws ConnectionException {
+        validateConnection();
+
+        try {
+            connection.write(request);
+            return true;
+        } catch (IOException e) {
+            logger.error("Error sending to GS Pro: {0}", e.getMessage());
+            statusPublisher.error(e);
+        }
+
+        return false;
+	}  
+
+    /**
+     * Creates/returns the {@link Connection}.
+     * 
+     * @return the {@link Connection} being used.
+     */
+    protected Connection createConnection() {
+        return new Connection(host, port, statusPublisher);
+    }
+
+    /**
+     * Ensure that we have a valid connection.
+     * 
+     * @throws ConnectionException
+     */
+    protected void validateConnection() throws ConnectionException {
+        if (connection == null) 
+            throw new ConnectionException("Not connected to GS Pro");
+    }
 
 }

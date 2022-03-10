@@ -1,4 +1,4 @@
-package kjd.gspro.api.v1;
+package kjd.gspro.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,4 +29,5 @@ public final class Json {
     public static <T> String writeValue(T object) throws JsonProcessingException {
         return MAPPER.writeValueAsString(object);
     }
+    
 }

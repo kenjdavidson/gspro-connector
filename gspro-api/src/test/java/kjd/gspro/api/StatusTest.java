@@ -10,14 +10,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import org.junit.Test;
 
-import kjd.gspro.api.v1.ClientImplTest;
-import kjd.gspro.api.v1.Json;
 import kjd.gspro.data.Club;
 import kjd.gspro.data.Hand;
 
 public class StatusTest {
 
-    ClientImplTest client = new ClientImplTest();
+    ClientTest client = new ClientTest();
 
     @Test
     public void serialize_status_connected() throws JsonProcessingException {
