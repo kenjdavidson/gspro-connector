@@ -18,19 +18,21 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"java.jdt.ls.java.home": "/docker-java-home"
+		"java.jdt.ls.java.home": "/docker-java-home",
+		"xml.format.preserveAttributeLinBreaks": true,
+		"xml.format.preserveNewLines": 1
 	},
 	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"vscjava.vscode-java-pack",
 		"Pivotal.vscode-boot-dev-pack",
-		"GabrielBB.vscode-lombok"
+		"GabrielBB.vscode-lombok",
+		"redhat.vscode-xml"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	
+	// "forwardPorts": [],	
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "java -version",

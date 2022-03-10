@@ -15,8 +15,6 @@ import kjd.gspro.data.Hand;
 
 public class StatusTest {
 
-    ClientTest client = new ClientTest();
-
     @Test
     public void serialize_status_connected() throws JsonProcessingException {
         Status status = Status.connected();

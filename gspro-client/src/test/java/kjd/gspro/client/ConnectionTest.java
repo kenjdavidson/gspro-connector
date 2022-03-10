@@ -1,4 +1,4 @@
-package kjd.gspro.api;
+package kjd.gspro.client;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -17,11 +17,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Spy;
 
-import kjd.gspro.api.ConnectionException;
-import kjd.gspro.api.Connection;
 import kjd.gspro.api.Publisher;
 import kjd.gspro.api.Status;
 
@@ -98,17 +96,17 @@ public class ConnectionTest {
         connection.connect();
     }
 
-    @Test
+    @Test @Ignore
     public void parse_completeMessage() {
         fail("Not yet implemented");
     }
 
-    @Test
+    @Test @Ignore
     public void parse_invalidMessage() {
         fail("Not yet implemented");
     }
 
-    @Test 
+    @Test @Ignore
     public void parse_completeMessage_withRemaining() {
         fail("Not yet implemented");
     }

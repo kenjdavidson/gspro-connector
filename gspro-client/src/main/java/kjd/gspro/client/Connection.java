@@ -1,4 +1,4 @@
-package kjd.gspro.api;
+package kjd.gspro.client;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -12,6 +12,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kjd.gspro.api.Json;
+import kjd.gspro.api.Publisher;
+import kjd.gspro.api.Request;
+import kjd.gspro.api.Status;
 import lombok.Synchronized;
 
 /**

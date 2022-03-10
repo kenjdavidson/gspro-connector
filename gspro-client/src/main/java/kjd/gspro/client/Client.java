@@ -1,4 +1,4 @@
-package kjd.gspro.api;
+package kjd.gspro.client;
 
 import java.io.IOException;
 import java.util.concurrent.Flow;
@@ -6,6 +6,9 @@ import java.util.concurrent.Flow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kjd.gspro.api.Publisher;
+import kjd.gspro.api.Request;
+import kjd.gspro.api.Status;
 import lombok.Getter;
 
 /**
@@ -15,7 +18,6 @@ import lombok.Getter;
  * @author kenjdavidson
  */
 public class Client implements Flow.Publisher<Status> {
-    
     public static final String DEFAULT_HOST = "127.0.0.1";
     public static final Integer DEFAULT_PORT = 921;
     public static final Integer DEFAULT_TIMEOUT = 300;

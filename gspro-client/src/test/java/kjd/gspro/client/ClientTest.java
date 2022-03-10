@@ -1,4 +1,4 @@
-package kjd.gspro.api;
+package kjd.gspro.client;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -13,6 +13,9 @@ import java.net.UnknownHostException;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import kjd.gspro.api.Publisher;
+import kjd.gspro.api.Request;
+import kjd.gspro.api.RequestBuilder;
 import kjd.gspro.data.Units;
 
 public class ClientTest {

@@ -1,4 +1,4 @@
-package kjd.gspro.api;
+package kjd.gspro.client;
 
 public class ConnectionException extends Exception {
 
