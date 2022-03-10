@@ -28,7 +28,8 @@
 		"vscjava.vscode-java-pack",
 		"Pivotal.vscode-boot-dev-pack",
 		"GabrielBB.vscode-lombok",
-		"redhat.vscode-xml"
+		"redhat.vscode-xml",
+		"spadin.remote-x11"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
