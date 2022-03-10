@@ -1,4 +1,4 @@
-package kjd.gspro.gsproui;
+package kjd.gspro.desktop;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +16,15 @@ public class GsProConnectApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         logger.debug("Starting GsProConnectApplication");
+
+        stage.setTitle("GS Pro Connect");
         stage.show();
     }
 
     @Override
     public void init() {
         logger.debug("Initializing Spring ApplicationContext");
-        applicationContext = new SpringApplicationBuilder(GSProConnectApplicationBoot.class).run();
+        applicationContext = new SpringApplicationBuilder(GsProConnectApplicationBoot.class).run();
     }
 
     @Override

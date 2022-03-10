@@ -1,12 +1,11 @@
-package kjd.gspro.gsproui;
+package kjd.gspro.desktop;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javafx.application.Application;
 
 @SpringBootApplication
-public class GSProConnectApplicationBoot {
+public class GsProConnectApplicationBoot {
 
 	public static void main(String[] args) {
 		Application.launch(GsProConnectApplication.class, args);

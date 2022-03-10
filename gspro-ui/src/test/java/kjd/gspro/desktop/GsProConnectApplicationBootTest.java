@@ -1,10 +1,10 @@
-package kjd.gspro.gsproui;
+package kjd.gspro.desktop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationLaunchTest {
+class GsProConnectApplicationBootTest {
 
 	@Test
 	void contextLoads() {

@@ -17,6 +17,12 @@ RUN if [ "${INSTALL_MAVEN}" = "true" ]; then su vscode -c "umask 0002 && . /usr/
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
+# Attempting to get JavaFX development available in the devcontainer
+# https://stackoverflow.com/questions/59076546/cannot-run-javafx-app-on-docker-for-more-than-a-few-minutes
+#https://github.com/praktikum-tiunpad-2021/oop-javafx-example/blob/master/.devcontainer/Dockerfile
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends libgtk-3-0 libglu1-mesa
+
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>

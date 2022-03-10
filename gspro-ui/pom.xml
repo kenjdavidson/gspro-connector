@@ -10,7 +10,7 @@
 
 	<groupId>kjd.gspro</groupId>
 	<artifactId>gspro-ui</artifactId>
-	<version>${parent.version}</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>gspro-ui</name>
 
 	<description>Demo project for Spring Boot</description>
