@@ -1,6 +1,5 @@
 package kjd.gspro.monitor;
 
-import java.util.Properties;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -51,14 +50,5 @@ public interface LaunchMonitor {
      * @param onShot
      */
     void onShot(BiConsumer<BallData,ClubData> onShot);
-
-    /**
-     * Launch monitor default {@link Properties}.  These properties may be saved or updated
-     * by the bridge (user) and will be provided to to the {@link LaunchMonitorProvider}
-     * during startup.
-     * 
-     * @return
-     */
-    Properties getDefaultProperties();
 
 }
