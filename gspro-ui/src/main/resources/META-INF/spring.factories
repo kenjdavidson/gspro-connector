@@ -1,0 +1,4 @@
+# Some standard/sample Launch Monitor provider(s)
+kjd.gspro.monitor.LaunchMonitorProvider=\
+kjd.gspro.desktop.monitor.FormLaunchMonitorProvider,\
+kjd.gspro.desktop.monitor.ThreeClickLaunchMonitorProvider

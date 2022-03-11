@@ -46,7 +46,6 @@
 	"forwardPorts": [
 		6080,	// desktop-lite web
 		5901,	// desktop-lite vnc
-		8080	// spring-boot
 	],	
 
 	// Use 'postCreateCommand' to run commands after the container is created.

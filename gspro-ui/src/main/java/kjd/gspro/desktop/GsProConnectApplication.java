@@ -1,19 +1,15 @@
 package kjd.gspro.desktop;
 
-import java.util.ResourceBundle;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import kjd.gspro.desktop.event.SceneEvent;
 
 public class GsProConnectApplication extends Application {
     private Logger logger = LoggerFactory.getLogger(GsProConnectApplication.class);    
@@ -23,8 +19,7 @@ public class GsProConnectApplication extends Application {
     public void start(Stage stage) throws Exception {
         logger.debug("Starting GsProConnectApplication");
 
-        stage.setTitle("GS Pro Connect");
-        stage.show();
+        applicationContext.publishEvent(new SceneEvent(this, stage, "kjd/gspro/desktop/ui/Application"));
     }
 
     @Override
