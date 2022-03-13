@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kjd.gspro.api.Json;
-import kjd.gspro.api.Publisher;
 import kjd.gspro.api.Request;
 import kjd.gspro.api.Status;
 import lombok.Synchronized;
@@ -42,18 +41,22 @@ public class Connection extends Thread {
 
     private String host;
     private Integer port;
-    private Publisher<Status> publisher;
     private Socket socket;
     private boolean connected;
+    private Optional<ConnectionListener> listener;
     private volatile boolean cancelled;
 
-    public Connection(String host, Integer port, Publisher<Status> publisher) {
+    public Connection(String host, Integer port) {
+        this(host, port, null);
+    }
+
+    public Connection(String host, Integer port, ConnectionListener listener) {
         this.connected = false;
         this.cancelled = false;
 
         this.host = host;
         this.port = port;
-        this.publisher = publisher;
+        this.listener = Optional.ofNullable(listener);
     }
 
     @Synchronized("$CONNECTION_LOCK")
@@ -67,8 +70,10 @@ public class Connection extends Thread {
 
     @Synchronized("$CONNECTION_LOCK")
     public void disconnect() {
-        safeClose();
         this.cancelled = true;
+
+        safeClose();
+        
         this.connected = false;
     }
 
@@ -77,20 +82,51 @@ public class Connection extends Thread {
         socket.getOutputStream().write(Json.writeValue(request).getBytes());
     }        
 
+    @Synchronized("$CONNECTION_LOCK")
+    public void addListener(ConnectionListener listener) {
+        this.listener = Optional.ofNullable(listener);
+    }
+
+    @Synchronized("$CONNECTION_LOCK")
+    public void clearListener() {
+        this.listener = Optional.empty();
+    }
+
     @Override
     public void run() {                   
         try {
             connect();
 
-            while (!cancelled) {
-                InputStream is = socket.getInputStream();
+            InputStream is = socket.getInputStream();
+            StringBuilder sb = new StringBuilder();  
+            int stack = 0;
 
-                StringBuilder sb = new StringBuilder();                
-                byte[] data = new byte[4096];
+            while (!cancelled) {    
+                int read;           
 
-                while (is.read(data) > 0) {
-                    sb.append(String.valueOf(data));
-                    parse(sb).ifPresent(publisher::publish);
+                // Continue reading until we run out of bytes. 
+                // While reading we want to check to see that we're getting '{'' and '}', once we get a matching count
+                // attempt to parse and send the Status.
+                // Finally reset the string and stack so that on the next read we start at the first next '{' 
+                while ((read = is.read()) > -1) {
+                    sb.append(String.valueOf((char) read));
+                    
+                    if (read == '{') stack++;
+                    else if (read == '}') stack--;
+
+                    if (stack == 0) {                                                                
+                        try {
+                            Status status = Json.readValue(sb.toString(), Status.class);
+                            sb.delete(0, sb.length());
+                            stack = 0;
+
+                            sendStatus(status);
+                        } catch (JsonProcessingException e) {
+                            error("Cannot process message", e);
+                        }  
+                        
+                        break;    
+                    }
                 }
 
                 safeSleep(100l);
@@ -103,47 +139,11 @@ public class Connection extends Thread {
             }            
         } finally {     
             safeClose();
-            connected = false;
-            publisher.complete();            
+            
+            connected = false;            
+            sendStatus(Status.disconnected());
         }
-    }
-
-    /**
-     * Attempt to parse the current data (there are different implementations of this, so this is using
-     * the safest one).  This moves through the data looking for '{' and '}' and when they match we've 
-     * hit the end of a full JSON object, so we attempt to send it.
-     * <p>
-     * This can get updated if it turns out the api uses delimiters or standard message sizes.
-     * 
-     * @param data {@link StringBuilder} containing the currently buffered data
-     * @return {@link Optional} {@link Status} from GSPro 
-     */
-    Optional<Status> parse(StringBuilder data) {
-        Optional<Status> status = Optional.empty();
-
-        int[] stack = new int[2];
-        for (int i = 0; i < data.length(); i++) {
-            if (data.charAt(i) == '{') 
-                stack[0]++;
-            else if (data.charAt(i) == '}') 
-                stack[1]++;
-
-            if (stack[0] == stack[1]) {                
-                String json = data.substring(0, i+1);
-                data.delete(0, i+1);
-
-                try {
-                    status = Optional.of(Json.readValue(json, Status.class));
-                } catch (JsonProcessingException e) {
-                    error("Cannot process message", e);
-                }    
-
-                break;
-            }
-        }
-
-        return status;
-    }    
+    } 
 
     /**
      * If not already connected, attempt to create the connection.
@@ -153,22 +153,15 @@ public class Connection extends Thread {
      */
     void connect() throws UnknownHostException, IOException { 
         if (!connected) {
-            logger.debug("Attempting connection to GS Pro @ {}:{}", host, port);
-            publisher.publish(Status.connecting());
+            sendStatus(Status.connecting());
 
             socket = createSocket(host, port);        
             connected = true;
 
-            logger.debug("Successfully connected to GS Pro");
-            publisher.publish(Status.connected());
+            sendStatus(Status.connected());
         }
     }
 
-    /**
-     * Safely close the socket.
-     * 
-     * @param closable
-     */
     private void safeClose() {
         try { 
             if (socket != null) {
@@ -179,11 +172,6 @@ public class Connection extends Thread {
         }
     }
 
-    /**
-     * Sleep handling any interupts accordingly.
-     * 
-     * @param sleep milliseconds to sleep
-     */
     private void safeSleep(long sleep) {
         try { 
             sleep(sleep); 
@@ -192,14 +180,15 @@ public class Connection extends Thread {
         }      
     }
 
-    /**
-     * Log and publish error
-     * 
-     * @param message
-     * @param t
-     */
+    private void sendStatus(Status status) {
+        logger.debug("Status received: {}", status.getMessage());
+        listener.ifPresent(l -> l.onStatus(status));
+    }
+
     private void error(String message, Throwable t) {
         logger.error(message, t);
-        publisher.error(t);
+
+        Status error = Status.builder().code(504).message(message).build();
+        listener.ifPresent(l -> l.onError(error, t));
     }
 }

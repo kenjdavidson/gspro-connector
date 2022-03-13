@@ -20,20 +20,29 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import kjd.gspro.api.Publisher;
 import kjd.gspro.api.Status;
 
 public class ConnectionTest {
     static final String HOST = Client.DEFAULT_HOST;
     static final Integer PORT = Client.DEFAULT_PORT;
 
-    Publisher<Status> publisher;
+    ConnectionListener listener;
     Connection connection;    
 
     @Before
     public void setup() {
-        publisher = spy(new Publisher<Status>());
-        connection = spy(new Connection(HOST, PORT, publisher));
+        listener = spy(new ConnectionListener() {
+            @Override
+            public void onStatus(Status status) {
+                // TODO Auto-generated method stub                
+            }
+
+            @Override
+            public void onError(Status status, Throwable t) {
+                // TODO Auto-generated method stub
+            }            
+        });
+        connection = spy(new Connection(HOST, PORT, listener));
     }
 
     @Test
@@ -78,8 +87,8 @@ public class ConnectionTest {
 
         connection.connect();
 
-        verify(publisher, times(1)).publish(Status.connecting());
-        verify(publisher, times(1)).publish(Status.connected());
+        verify(listener, times(1)).onStatus(Status.connecting());
+        verify(listener, times(1)).onStatus(Status.connected());
     }
 
     @Test(expected = UnknownHostException.class)

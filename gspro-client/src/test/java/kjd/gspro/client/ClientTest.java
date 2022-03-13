@@ -1,7 +1,6 @@
 package kjd.gspro.client;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -13,7 +12,6 @@ import java.net.UnknownHostException;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import kjd.gspro.api.Publisher;
 import kjd.gspro.api.Request;
 import kjd.gspro.api.RequestBuilder;
 import kjd.gspro.data.Units;
@@ -45,14 +43,6 @@ public class ClientTest {
         Client client = new Client("192.168.1.1", 8080);
 
         assertTrue(client.getPort().equals(8080));
-    }
-
-    @Test
-    public void getStatusPublisher() {
-        Client client = new Client();
-
-        assertNotNull(client.getStatusPublisher());
-        assertTrue(client.getStatusPublisher() instanceof Publisher);
     }
 
     @Test

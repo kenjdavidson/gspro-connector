@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>kjd.gspro</groupId>
-  <artifactId>gspro-bridge</artifactId>
+  <artifactId>gspro-connector</artifactId>
   <version>1.0-SNAPSHOT</version>
   <url>https://github.com/kenjdavidson/gspro-bridge</url>
 
@@ -19,7 +19,7 @@
   <modules>
     <module>gspro-api</module>
     <module>gspro-client</module>
-    <module>gspro-ui</module>
+    <module>gspro-app</module>
   </modules>
 
   <dependencies>
