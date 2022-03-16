@@ -24,13 +24,24 @@ public interface LaunchMonitor {
     void notifyPlayer(Player player);
 
     /**
-     * {@link LaunchMonitorListener} is used to fire events that will be forwarded to the
-     * required places.  All LaunchMonitors will have the bridge provide a listener, which
-     * will be used to communicate data accordingly.
+     * The bridge implementation will provide a single listener that is used for sending requests (status) to 
+     * GS Pro.  
+     * <p>
+     * It might be wise to implement as a {@link java.lang.ref.WeakReference} incase anything goes down on the
+     * GS Pro side of things.
      * 
      * @param listener
      */
     void addListener(Listener listener);
+
+    /**
+     * Provides a method for removing a {@link Listener} if the bridge needs to reset the GS Pro connection
+     * or something goes bad.
+     * 
+     * @param listener
+     * @return
+     */
+    Listener removeListener(Listener listener);
 
     /**
      * {@link LaunchMonitor}(s) provides the {@link Listener} as a method for communication of
