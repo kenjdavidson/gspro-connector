@@ -10,7 +10,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import kjd.gspro.api.Connection;
 import kjd.gspro.api.ConnectionListener;
 import kjd.gspro.api.Status;
-import kjd.gspro.client.Client;
 import kjd.gspro.data.Player;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +38,7 @@ public class BridgeService implements ConnectionListener {
     public void connect() {
         if (connection == null || !connection.isConnected()) {
             publisher.publishEvent(new StatusEvent(this, Status.connecting()));
-            connection = new Connection(Client.DEFAULT_HOST, Client.DEFAULT_PORT, this);
+            connection = new Connection(this);
             connection.start();
         }
     }

@@ -32,8 +32,11 @@ import lombok.Synchronized;
  * @author kenjdavidson
  */
 public class Connection extends Thread {
-    private static final Logger logger = LoggerFactory.getLogger(Connection.class);
 
+    public static final String DEFAULT_HOST = "127.0.0.1";
+    public static final Integer DEFAULT_PORT = 921;
+    
+    private final Logger logger = LoggerFactory.getLogger(Connection.class);
     private final Object[] $CONNECTION_LOCK = new Object[0];
 
     private String host;
@@ -42,6 +45,10 @@ public class Connection extends Thread {
     private boolean connected;
     private Optional<ConnectionListener> listener;
     private volatile boolean cancelled;
+
+    public Connection(ConnectionListener listener) {
+        this(DEFAULT_HOST, DEFAULT_PORT, listener);
+    }
 
     public Connection(String host, Integer port) {
         this(host, port, null);
