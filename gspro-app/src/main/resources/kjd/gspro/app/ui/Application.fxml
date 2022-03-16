@@ -70,11 +70,13 @@
           </Tab>
             <Tab text="%tab.shotlog.title">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <fx:include fx:id="shotHistoryPane" source="bridge/ShotHistoryPane.fxml" />
               </content>
             </Tab>
             <Tab text="%tab.logs.title">
-               <fx:include fx:id="logViewPane" source="bridge/LogViewPane.fxml" />
+               <content>
+                  <fx:include fx:id="logViewPane" source="bridge/LogViewPane.fxml" />
+               </content>               
             </Tab>
         </tabs>
       </TabPane>

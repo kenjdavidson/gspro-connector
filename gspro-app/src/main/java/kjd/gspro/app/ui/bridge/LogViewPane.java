@@ -3,13 +3,12 @@ package kjd.gspro.app.ui.bridge;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.ResourceBundle;
 
-import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,11 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import kjd.gspro.app.bridge.LogEntry;
-import kjd.gspro.app.bridge.LogService;
 import kjd.gspro.app.bridge.LogEntry.Type;
+import kjd.gspro.app.bridge.LogService;
 
 @Component
 @Scope("prototype")
@@ -42,14 +39,24 @@ public class LogViewPane implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logTable.setItems(logService.getEntries());
-        logTable.setPlaceholder(new Label(""));
+        initializeTable();
+        initilizeClearButton();
 
         logTable.getItems().addAll(
             new LogEntry(Type.INFO, "Tittle X Play", "Starting up"),
             new LogEntry(Type.INFO, "GS Pro", "Starting up"),
             new LogEntry(Type.INFO, "GS Pro", "Player data sent")
         );
+    }
+
+    void initilizeClearButton() {
+        clearButton.disableProperty().bind(Bindings.isEmpty(logTable.getItems()));
+    }
+
+    @SuppressWarnings("unchecked")
+    void initializeTable() {
+        logTable.setItems(logService.getEntries());
+        logTable.setPlaceholder(new Label(""));
 
         TableColumn<LogEntry, LocalDateTime> dateColumn = new TableColumn<>("Date");
         dateColumn.prefWidthProperty().bind(logTable.widthProperty().multiply(0.25));

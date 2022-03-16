@@ -7,6 +7,18 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 
+/**
+ * JavaFX "bean" used for handling/logging details.  This doesn't follow the standard
+ * JavaFX bean providing the three methods {@code setValue}, {@code getValue} and 
+ * {@code valueProperty} since using Lombok is less annoying.
+ * <p>
+ * The only real issue is that we can't use the build in 
+ * {@link javafx.scene.control.cell.PropertyValueFactory} functionality in a number
+ * of components.  This is a minor issue, as we can just directly reference the 
+ * appropriate {@code get} method.
+ * 
+ * @author kenjdavidson
+ */
 @Getter
 public class LogEntry {
     public static enum Type {
