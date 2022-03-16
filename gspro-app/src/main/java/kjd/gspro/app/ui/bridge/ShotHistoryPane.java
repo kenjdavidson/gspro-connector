@@ -46,13 +46,12 @@ public class ShotHistoryPane implements Initializable {
         clearButton.disableProperty().bind(Bindings.isEmpty(shotTable.getItems()));
         exportButton.disableProperty().bind(Bindings.isEmpty(shotTable.getItems()));
 
-        initializeTable();
-
-        shotTable.setItems(shotHistoryService.getShotHistory());
+        initializeTable();        
     }    
 
     @SuppressWarnings("unchecked")
     private void initializeTable() {
+        shotTable.setItems(shotHistoryService.getShotHistory());
         shotTable.setPlaceholder(new Label(""));
 
         TableColumn<Shot, Number> ballSpeedColumn = createColumn("Speed", value -> value.getValue().getBallSpeed());

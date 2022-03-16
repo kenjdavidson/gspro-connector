@@ -1,6 +1,5 @@
 package kjd.gspro.app.bridge;
 
-import javafx.beans.property.FloatProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleFloatProperty;
 import kjd.gspro.data.BallData;

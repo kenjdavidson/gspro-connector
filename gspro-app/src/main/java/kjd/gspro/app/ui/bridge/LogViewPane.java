@@ -41,12 +41,6 @@ public class LogViewPane implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initializeTable();
         initilizeClearButton();
-
-        logTable.getItems().addAll(
-            new LogEntry(Type.INFO, "Tittle X Play", "Starting up"),
-            new LogEntry(Type.INFO, "GS Pro", "Starting up"),
-            new LogEntry(Type.INFO, "GS Pro", "Player data sent")
-        );
     }
 
     void initilizeClearButton() {
