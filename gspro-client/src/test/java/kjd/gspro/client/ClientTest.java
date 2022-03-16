@@ -12,6 +12,8 @@ import java.net.UnknownHostException;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import kjd.gspro.api.Connection;
+import kjd.gspro.api.ConnectionException;
 import kjd.gspro.api.Request;
 import kjd.gspro.api.RequestBuilder;
 import kjd.gspro.data.Units;

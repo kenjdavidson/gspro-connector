@@ -6,7 +6,9 @@ import java.util.concurrent.Flow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kjd.gspro.api.Publisher;
+import kjd.gspro.api.Connection;
+import kjd.gspro.api.ConnectionException;
+import kjd.gspro.api.ConnectionListener;
 import kjd.gspro.api.Request;
 import kjd.gspro.api.Status;
 import lombok.Getter;
@@ -37,18 +39,39 @@ public class Client implements Flow.Publisher<Status>, ConnectionListener {
 
     private Publisher<Status> publisher;
 
+    /**
+     * Create a new {@link Client}.
+     */
     public Client() {
         this(DEFAULT_HOST, DEFAULT_PORT);
     }
 
+    /**
+     * Create a new {@link Client}.
+     * 
+     * @param host hostname in which to connect
+     */
     public Client(String host) {
         this(host, DEFAULT_PORT);
     }
 
+    /**
+     * Create a new {@link Client}.
+     * 
+     * @param host hostname in which to connect
+     * @param port port in which to connect
+     */
     public Client(String host, Integer port) {
         this(host, port, DEFAULT_TIMEOUT);
     }
 
+    /**
+     * Create a new {@link Client}.
+     * 
+     * @param host hostname in which to connect
+     * @param port port in which to connect
+     * @param timeout timeout is currently ignored
+     */
     public Client(String host, Integer port, Integer timeout) {
         this.host = host;
         this.port = port;
@@ -147,11 +170,17 @@ public class Client implements Flow.Publisher<Status>, ConnectionListener {
             throw new ConnectionException("Not connected to GS Pro");
     }
 
+    /**
+     * {@link ConnectionListener} implementation for delegating messages.
+     */
     @Override
     public void onStatus(Status status) {
         publisher.publish(status);
     }
 
+    /**
+     * {@link ConnectionListener} implementation for delegating errors.
+     */
     @Override
     public void onError(Status error, Throwable t) {
         publisher.error(new GSProException(error.getMessage(), t));

@@ -1,4 +1,4 @@
-package kjd.gspro.app.ui;
+package kjd.gspro.app.ui.preference;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,10 +16,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import kjd.gspro.app.event.ApplicationShutdownEvent;
+import kjd.gspro.app.ApplicationShutdownEvent;
 import kjd.gspro.app.event.SceneEvent;
 
 @Component
+@Scope("prototype")
 public class ApplicationController implements Initializable, PrimaryStageAware {
 
     @Autowired 
@@ -53,7 +55,7 @@ public class ApplicationController implements Initializable, PrimaryStageAware {
 
     @FXML 
     public void onHelpAbout(ActionEvent event) {
-        publisher.publishEvent(new SceneEvent(event.getSource(), "about", (Stage) layout.getScene().getWindow()));
+        
     }
 
     @Override

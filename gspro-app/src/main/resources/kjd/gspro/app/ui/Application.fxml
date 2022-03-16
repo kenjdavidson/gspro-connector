@@ -32,29 +32,27 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="layout" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kjd.gspro.app.ui.ApplicationController">
+<BorderPane fx:id="layout" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kjd.gspro.app.ui.ApplicationController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
-            <Menu mnemonicParsing="false" text="File">
+            <Menu mnemonicParsing="false" text="%menu.file.title">
                <items>
                   <MenuItem fx:id="miPreferences" mnemonicParsing="false" text="%menu.file.preferences" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="miQuit" mnemonicParsing="false" onAction="#onFileClose" text="%menu.file.quit" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Help">
+            <Menu mnemonicParsing="false" text="%menu.help.title">
                <items>
                   <MenuItem fx:id="miAbout" mnemonicParsing="false" onAction="#onHelpAbout" text="%menu.help.about" />
                </items>
@@ -63,29 +61,22 @@
       </MenuBar>
    </top>
    <center>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <BorderPane layoutX="112.0" layoutY="42.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <top>
-                        <VBox BorderPane.alignment="CENTER" />
-                     </top>
-                     <center>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <ListView fx:id="lvStatusLog" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="%tab.gspro.title">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="%tab.shotlog.title">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="%tab.logs.title">
+               <fx:include fx:id="logViewPane" source="bridge/LogViewPane.fxml" />
+            </Tab>
+        </tabs>
+      </TabPane>
    </center>
-   <bottom>
-      <ToolBar prefHeight="25.0" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>

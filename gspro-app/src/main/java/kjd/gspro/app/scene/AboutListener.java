@@ -4,18 +4,18 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javafx.scene.control.Dialog;
-import kjd.gspro.app.FXMLManager;
-import kjd.gspro.app.LocaleService;
+import kjd.gspro.app.ViewManager;
+import kjd.gspro.app.LocaleManager;
 import kjd.gspro.app.event.SceneEvent;
 
 @Component
 public class AboutListener {
 
     Dialog<String> dialog;
-    FXMLManager fxmlManager;    
-    LocaleService localeService;
+    ViewManager fxmlManager;    
+    LocaleManager localeService;
 
-    public AboutListener(FXMLManager fxmlManager, LocaleService localeService) {
+    public AboutListener(ViewManager fxmlManager, LocaleManager localeService) {
         this.fxmlManager = fxmlManager;        
         this.localeService = localeService;
     }

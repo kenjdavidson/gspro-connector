@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 @Component
-@Scope("singleton")
-public class LocaleService {
+public class LocaleManager {
 
     public static final String NAME = "i18n";
 
@@ -23,7 +22,6 @@ public class LocaleService {
         return changeLocale(Locale.forLanguageTag(locale));
     }
 
-    // TODO: Look into reloading the scene graph when changed
     public ResourceBundle changeLocale(Locale locale) {
         this.locale = locale;
         this.resources = ResourceBundle.getBundle(NAME, locale);

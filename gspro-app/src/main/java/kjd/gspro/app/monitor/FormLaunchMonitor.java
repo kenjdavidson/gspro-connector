@@ -27,5 +27,10 @@ public class FormLaunchMonitor implements LaunchMonitor {
     public void addListener(Listener listener) {
         this.listener = new WeakReference<LaunchMonitor.Listener>(listener);
     }
+
+    @Override
+    public Listener removeListener(Listener listener) {
+        return null;
+    }
     
 }
