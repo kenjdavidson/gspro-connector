@@ -32,12 +32,16 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -64,9 +68,18 @@
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="%tab.gspro.title">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
+               <content>
+                  <SplitPane dividerPositions="0.25375">
+                    <items>
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="235.0">
+                           <children>
+                              <fx:include source="bridge/GSProPane.fxml" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                    </items>
+                  </SplitPane>
+               </content>
           </Tab>
             <Tab text="%tab.shotlog.title">
               <content>
@@ -81,4 +94,15 @@
         </tabs>
       </TabPane>
    </center>
+   <bottom>
+      <ToolBar maxHeight="20.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" BorderPane.alignment="CENTER">
+         <items>
+            <Label fx:id="tbMonitorStatus" />
+            <Label text="%monitor.status" />
+            <Separator orientation="VERTICAL" />
+            <Label fx:id="tbGsproStatus" />
+            <Label text="%gspro.status" />
+         </items>
+      </ToolBar>
+   </bottom>
 </BorderPane>

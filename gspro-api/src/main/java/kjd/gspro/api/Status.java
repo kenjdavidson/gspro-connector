@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 public class Status {
     public static final Status connecting() {
         return Status.builder()
-            .code(100)
+            .code(101)
             .connected(false)
             .message("Connecting to GS Pro...")
             .build();
@@ -38,7 +38,7 @@ public class Status {
 
     public static final Status connected() {
         return Status.builder()
-            .code(100)
+            .code(102)
             .connected(true)
             .message("Connected to GS Pro!")
             .build();
@@ -46,9 +46,17 @@ public class Status {
 
     public static final Status disconnected() {
         return Status.builder()
-            .code(100)
+            .code(103)
             .connected(false)
             .message("Disconnected.")
+            .build();
+    }
+
+    public static final Status error(Throwable t, Boolean connected) {
+        return Status.builder()
+            .code(500)
+            .connected(connected)
+            .message(t.getMessage())
             .build();
     }
 

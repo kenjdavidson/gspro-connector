@@ -38,6 +38,18 @@ public class ConnectionTest {
             @Override
             public void onError(Status status, Throwable t) {
                 // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onConnected(Status status) {
+                // TODO Auto-generated method stub
+                
+            }
+
+            @Override
+            public void onDisconnect(Status status) {
+                // TODO Auto-generated method stub
+                
             }            
         });
         connection = spy(new Connection(HOST, PORT, listener));
@@ -85,7 +97,6 @@ public class ConnectionTest {
 
         connection.connect();
 
-        verify(listener, times(1)).onStatus(Status.connecting());
         verify(listener, times(1)).onStatus(Status.connected());
     }
 

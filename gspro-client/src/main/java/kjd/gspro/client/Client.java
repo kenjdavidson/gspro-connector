@@ -18,7 +18,9 @@ import lombok.Getter;
  * <p>
  * 
  * @author kenjdavidson
+ * @deprecated probably don't need this level since we can handle events in application
  */
+@Deprecated
 public class Client implements Flow.Publisher<Status>, ConnectionListener {
     public static final String DEFAULT_HOST = "127.0.0.1";
     public static final Integer DEFAULT_PORT = 921;
@@ -112,11 +114,11 @@ public class Client implements Flow.Publisher<Status>, ConnectionListener {
      * 
      * @throws ConnectionException if the {@link Connection} cannot be established
      */
-    public void disconnect() throws ConnectionException {
-        validateConnection();
-
-        connection.disconnect();
-        connection = null;
+    public void disconnect() {
+        if (connection.isConnected()) {
+            connection.disconnect();
+            connection = null;
+        }
     }    
 
     /**
@@ -175,6 +177,7 @@ public class Client implements Flow.Publisher<Status>, ConnectionListener {
      */
     @Override
     public void onStatus(Status status) {
+        
         publisher.publish(status);
     }
 
@@ -184,6 +187,18 @@ public class Client implements Flow.Publisher<Status>, ConnectionListener {
     @Override
     public void onError(Status error, Throwable t) {
         publisher.error(new GSProException(error.getMessage(), t));
+    }
+
+    @Override
+    public void onConnected(Status status) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onDisconnect(Status status) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

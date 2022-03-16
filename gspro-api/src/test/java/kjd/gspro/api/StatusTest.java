@@ -19,21 +19,21 @@ public class StatusTest {
     public void serialize_status_connected() throws JsonProcessingException {
         Status status = Status.connected();
 
-        assertEquals("{\"Code\":100,\"Message\":\"Connected to GS Pro!\",\"Connected\":true}", Json.writeValue(status));
+        assertEquals("{\"Code\":102,\"Message\":\"Connected to GS Pro!\",\"Connected\":true}", Json.writeValue(status));
     }
 
     @Test
     public void serialize_status_connecting() throws JsonProcessingException {
         Status status = Status.connecting();
 
-        assertEquals("{\"Code\":100,\"Message\":\"Connecting to GS Pro...\",\"Connected\":false}", Json.writeValue(status));
+        assertEquals("{\"Code\":101,\"Message\":\"Connecting to GS Pro...\",\"Connected\":false}", Json.writeValue(status));
     }
 
     @Test
     public void serialize_status_disconnected() throws JsonProcessingException {
         Status status = Status.disconnected();
 
-        assertEquals("{\"Code\":100,\"Message\":\"Disconnected.\",\"Connected\":false}", Json.writeValue(status));
+        assertEquals("{\"Code\":103,\"Message\":\"Disconnected.\",\"Connected\":false}", Json.writeValue(status));
     }
 
     @Test

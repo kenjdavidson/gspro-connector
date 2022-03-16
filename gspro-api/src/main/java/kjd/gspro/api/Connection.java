@@ -117,7 +117,8 @@ public class Connection extends Thread {
                             sb.delete(0, sb.length());
                             stack = 0;
 
-                            sendStatus(status);
+                            logger.debug("Received message from GS Pro: {}", status.getMessage());
+                            listener.ifPresent(l -> l.onStatus(status));
                         } catch (JsonProcessingException e) {
                             error("Cannot process message", e);
                         }  
@@ -138,7 +139,8 @@ public class Connection extends Thread {
             safeClose();
             
             connected = false;            
-            sendStatus(Status.disconnected());
+            logger.debug("Disconnected from GS Pro, canceled: {}", cancelled);
+            listener.ifPresent(l -> l.onDisconnect(Status.disconnected()));
         }
     } 
 
@@ -150,12 +152,11 @@ public class Connection extends Thread {
      */
     void connect() throws UnknownHostException, IOException { 
         if (!connected) {
-            sendStatus(Status.connecting());
-
             socket = createSocket(host, port);        
             connected = true;
 
-            sendStatus(Status.connected());
+            logger.debug("Successfully connected to GS Pro");
+            listener.ifPresent(l -> l.onStatus(Status.connected()));
         }
     }
 
@@ -175,11 +176,6 @@ public class Connection extends Thread {
         } catch(InterruptedException e) { 
             logger.error("Connection thread interupted, continuing...", e); 
         }      
-    }
-
-    private void sendStatus(Status status) {
-        logger.debug("Status received: {}", status.getMessage());
-        listener.ifPresent(l -> l.onStatus(status));
     }
 
     private void error(String message, Throwable t) {

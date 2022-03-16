@@ -22,7 +22,7 @@ import kjd.gspro.app.bridge.ShotHistoryService;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
-@Scope("singleton")
+@Scope("prototype")
 @Slf4j
 public class ShotHistoryPane implements Initializable {
 

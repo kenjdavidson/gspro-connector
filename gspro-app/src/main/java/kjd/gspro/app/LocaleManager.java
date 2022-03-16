@@ -3,9 +3,12 @@ package kjd.gspro.app;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.BooleanProperty;
 import lombok.Getter;
 
 @Component
@@ -27,5 +30,4 @@ public class LocaleManager {
         this.resources = ResourceBundle.getBundle(NAME, locale);
         return this.resources;
     }
-
 }

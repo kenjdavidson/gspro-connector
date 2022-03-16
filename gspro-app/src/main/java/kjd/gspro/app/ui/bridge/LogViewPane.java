@@ -19,10 +19,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import kjd.gspro.app.bridge.LogEntry;
 import kjd.gspro.app.bridge.LogEntry.Type;
+import lombok.extern.slf4j.Slf4j;
 import kjd.gspro.app.bridge.LogService;
 
 @Component
 @Scope("prototype")
+@Slf4j
 public class LogViewPane implements Initializable {
 
     LogService logService;
