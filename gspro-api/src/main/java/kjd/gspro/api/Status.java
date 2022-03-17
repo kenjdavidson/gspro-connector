@@ -60,6 +60,21 @@ public class Status {
             .build();
     }
 
+    public static final Status player(Player player) {
+        return Status.builder()
+            .code(201)
+            .message("GS Pro Player Information")
+            .player(player)
+            .build();
+    }
+
+    public static final Status ok() {
+        return Status.builder()
+            .code(200)
+            .message("Data received successfully")
+            .build();
+    }
+
     @JsonProperty("Code")
     private Integer code;
 

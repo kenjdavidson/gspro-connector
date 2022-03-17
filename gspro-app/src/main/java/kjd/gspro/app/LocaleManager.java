@@ -5,12 +5,18 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Component;
 
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringBinding;
-import javafx.beans.property.BooleanProperty;
 import lombok.Getter;
 
+/**
+ * Manage application locale.  I'm not sure how important this is to have, I can't imagine anyone would
+ * have their OS set to English but want anything else on an application (ie. they'd have their OS set
+ * accordingly).
+ * <p>
+ * May be removed.
+ * 
+ * @author kenjdavidson
+ * @deprecated debating the requirement for this since the OS Locale.getDefault() should be correct
+ */
 @Component
 public class LocaleManager {
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import kjd.gspro.app.ui.PrimaryStageAware;
+import kjd.gspro.app.ui.StageAware;
 
 @Component
 public class ViewManager {
@@ -28,11 +28,17 @@ public class ViewManager {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(resource), ResourceBundle.getBundle("i18n"));
         
         loader.setControllerFactory(applicationContext::getBean);
+
+        // Need to find a way to make an fxml scope so that controller and builder will return the same
+        // controller from the context, instead of needing the controller to be a singleton (bad) or 
+        // having two different instances of the same class (also bad); since all examples for use of
+        // fx:root use #setRoot(this); #setController(this); when performing the load.
+        //loader.setBuilderFactory(builderFactory);
         
         T parent = loader.load();  
 
-        if (loader.getController() instanceof PrimaryStageAware) {
-            ((PrimaryStageAware)loader.getController()).setPrimaryStage(stage);
+        if (loader.getController() instanceof StageAware) {
+            ((StageAware)loader.getController()).setStage(stage);
         }
 
         return parent;

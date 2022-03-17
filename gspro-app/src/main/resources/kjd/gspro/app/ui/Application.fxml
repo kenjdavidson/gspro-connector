@@ -69,7 +69,7 @@
         <tabs>
           <Tab text="%tab.gspro.title">
                <content>
-                  <SplitPane dividerPositions="0.25375">
+                  <SplitPane disable="true" dividerPositions="0.265">
                     <items>
                         <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="235.0">
                            <children>

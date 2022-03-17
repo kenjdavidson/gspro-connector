@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch GsProConnectSimulatorApp",
+            "request": "launch",
+            "mainClass": "kjd.gspro.app.GsProConnectSimulatorApp",
+            "projectName": "gspro-app"
+        },
+        {
+            "type": "java",
+            "name": "Launch GsProConnectSimulator",
+            "request": "launch",
+            "mainClass": "kjd.gspro.app.GsProConnectSimulator",
+            "projectName": "gspro-app"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

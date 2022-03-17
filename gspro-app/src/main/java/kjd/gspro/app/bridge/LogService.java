@@ -17,11 +17,13 @@ public class LogService {
     private ObservableList<LogEntry> entries;
 
     public LogService() {
+        log.debug("Initializing service");
         entries = FXCollections.observableArrayList();   
     }
 
     @EventListener
     public void onStatusEvent(StatusEvent event) {
+        log.debug("Processing StatusEvent {}", event);
         LogEntry entry = log(event.getSource(), event.getStatus());
         entries.add(entry);
     }

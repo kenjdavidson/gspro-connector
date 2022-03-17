@@ -6,8 +6,11 @@ import kjd.gspro.data.BallData;
 import kjd.gspro.data.ClubData;
 import kjd.gspro.data.Options;
 import kjd.gspro.data.Units;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
@@ -20,7 +23,9 @@ import lombok.NonNull;
  * 
  * @author kenjdavidson
  */
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Builder
 public class Request {
 

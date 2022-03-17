@@ -3,12 +3,15 @@ package kjd.gspro.app;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.controlsfx.control.Notifications;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -59,5 +62,16 @@ public class StageManager {
     @EventListener
     public void onShutdownEvent(ApplicationShutdownEvent event) throws Exception {
         application.stop();
+    }
+
+    @EventListener 
+    public void onApplicationError(ApplicationErrorEvent event) {
+        Platform.runLater(() -> {
+            Notifications.create()
+                .owner(primaryStage.getValue())
+                .text(event.getMessage())
+                .position(Pos.BOTTOM_CENTER)
+                .showError();
+        });        
     }
 }

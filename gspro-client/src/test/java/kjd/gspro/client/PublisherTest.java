@@ -17,7 +17,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import kjd.gspro.api.Status;
-import kjd.gspro.client.Publisher;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PublisherTest {

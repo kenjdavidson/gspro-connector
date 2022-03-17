@@ -39,6 +39,8 @@
             <Label fx:id="clubLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Separator prefWidth="200.0" />
+      <Button fx:id="heartbeatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendHeartbeat" text="%gspro.heartbeat" />
    </children>
    <padding>
       <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

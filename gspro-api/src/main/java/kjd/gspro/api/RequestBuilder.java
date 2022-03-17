@@ -73,7 +73,7 @@ public class RequestBuilder {
                 .clubData(false)
                 .heartBeat(true)
                 .monitorReady(ready)
-                .ballData(ballDetected)
+                .monitorBallDetected(ballDetected)
                 .build()
             )
             .build();

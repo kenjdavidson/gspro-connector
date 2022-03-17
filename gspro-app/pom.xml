@@ -55,7 +55,7 @@
 		</dependency>
 		<dependency>
 			<groupId>kjd.gspro</groupId>
-			<artifactId>gspro-client</artifactId>
+			<artifactId>gspro-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

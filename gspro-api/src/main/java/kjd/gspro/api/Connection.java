@@ -55,6 +55,8 @@ public class Connection extends Thread {
     }
 
     public Connection(String host, Integer port, ConnectionListener listener) {
+        super("gs-pro-connector");
+
         this.connected = false;
         this.cancelled = false;
 
@@ -127,7 +129,7 @@ public class Connection extends Thread {
                             logger.debug("Received message from GS Pro: {}", status.getMessage());
                             listener.ifPresent(l -> l.onStatus(status));
                         } catch (JsonProcessingException e) {
-                            error("Cannot process message", e);
+                            error("Unable to process mssage from GS Pro", e);
                         }  
                         
                         break;    
@@ -137,7 +139,7 @@ public class Connection extends Thread {
                 safeSleep(100l);
             }                        
         } catch(UnknownHostException e) {
-            error("Unable to connect to GS Pro Connect Api", e);
+            error("Unable to connect to GS Pro Connect Api host", e);
         } catch (IOException e) {
             if (!cancelled) {
                 error("Error during communication, dropping connection", e);
@@ -163,7 +165,7 @@ public class Connection extends Thread {
             connected = true;
 
             logger.debug("Successfully connected to GS Pro");
-            listener.ifPresent(l -> l.onStatus(Status.connected()));
+            listener.ifPresent(l -> l.onConnected(Status.connected()));
         }
     }
 

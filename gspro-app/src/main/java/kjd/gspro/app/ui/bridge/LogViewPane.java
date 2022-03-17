@@ -85,6 +85,7 @@ public class LogViewPane implements Initializable {
 
     @FXML
     public void clearLogs(Event event) {
+        log.debug("Clearing debug log data");
         logTable.getItems().clear();
     }
 }
