@@ -1,6 +1,8 @@
 package kjd.gspro.app.monitor;
 
 import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.Optional;
 import java.util.Properties;
 
 import kjd.gspro.data.Player;
@@ -20,7 +22,7 @@ public class FormLaunchMonitor implements LaunchMonitor {
 
     @Override
     public void notifyPlayer(Player player) {
-        // Player changed (hand/club) update accordingly
+        System.out.println(MessageFormat.format("Changing player {0}", player));
     }
 
     @Override
@@ -30,7 +32,25 @@ public class FormLaunchMonitor implements LaunchMonitor {
 
     @Override
     public Listener removeListener(Listener listener) {
-        return null;
+        Listener l = this.listener.get();
+        this.listener.clear();
+        return l;
     }
+
+    /**
+     * Connect always completes successfully.
+     */
+	@Override
+	public void connect() {
+        Optional.of(listener.get()).ifPresent(l -> l.onConnected());
+	}
+    
+    /**
+     * Disconnect always completes successfully.
+     */
+	@Override
+	public void disconnect() {
+        Optional.of(listener.get()).ifPresent(l -> l.onDisconnected());
+	}
     
 }

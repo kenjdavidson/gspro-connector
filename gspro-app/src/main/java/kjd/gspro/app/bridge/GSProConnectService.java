@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class BridgeService implements ConnectionListener {
+public class GSProConnectService implements ConnectionListener {
 
     ApplicationEventPublisher publisher;
 
@@ -34,7 +34,7 @@ public class BridgeService implements ConnectionListener {
     Connection connection;
     RequestBuilder requestBuilder;
 
-    public BridgeService(ApplicationEventPublisher publisher) {
+    public GSProConnectService(ApplicationEventPublisher publisher) {
         this.publisher = publisher;
 
         connectionStatus = new SimpleObjectProperty<>(this, "gsproConnected", ConnectionStatus.DISCONNECTED);

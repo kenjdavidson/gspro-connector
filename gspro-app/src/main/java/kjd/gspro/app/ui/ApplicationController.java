@@ -18,7 +18,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.controlsfx.dialog.Wizard;
 import kjd.gspro.app.ApplicationShutdownEvent;
-import kjd.gspro.app.bridge.BridgeService;
+import kjd.gspro.app.bridge.GSProConnectService;
 import kjd.gspro.app.ui.about.AboutDialog;
 import kjd.gspro.app.util.ConnectionButtonTextBinding;
 import kjd.gspro.app.util.ConnectionStatusColourBinding;
@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ApplicationController implements Initializable, StageAware {
 
     ApplicationEventPublisher publisher;
-    BridgeService bridgeService;
+    GSProConnectService bridgeService;
 
     @FXML BorderPane layout;
 
@@ -48,7 +48,7 @@ public class ApplicationController implements Initializable, StageAware {
 
     SimpleObjectProperty<Stage> stage = new SimpleObjectProperty<>();
 
-    public ApplicationController(ApplicationEventPublisher publisher, BridgeService bridgeService) {
+    public ApplicationController(ApplicationEventPublisher publisher, GSProConnectService bridgeService) {
         log.debug("Initializing application controller");
         this.publisher = publisher;
         this.bridgeService = bridgeService;

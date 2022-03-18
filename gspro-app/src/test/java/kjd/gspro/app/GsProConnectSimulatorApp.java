@@ -48,16 +48,21 @@ public class GsProConnectSimulatorApp {
     }
 
     public static void main(String[] args) {
-        log("Starting simulator app, waiting on connection from client...");
+        log("Starting simulator app");
 
-        try (ServerSocket ss = new ServerSocket(Connection.DEFAULT_PORT);
-                Socket socket = ss.accept()) {                    
-            log("GS Pro Connector Client connected, starting simulator");
+        try (ServerSocket ss = new ServerSocket(Connection.DEFAULT_PORT)) {                                
+            while (true) {
+                log("Waiting on connection from client...");
+                
+                try (Socket socket = ss.accept()) {
+                    log("GS Pro Connector Client connected, starting simulator");
 
-            GsProConnectSimulator simulator = new GsProConnectSimulator(socket);
-            Thread thread = new Thread(simulator);
-            thread.start();
-            thread.join();
+                    GsProConnectSimulator simulator = new GsProConnectSimulator(socket);
+                    Thread thread = new Thread(simulator);
+                    thread.start();
+                    thread.join();
+                }
+            }            
         } catch(IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

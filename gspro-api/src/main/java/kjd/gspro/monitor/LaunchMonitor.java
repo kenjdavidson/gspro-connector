@@ -13,6 +13,20 @@ import kjd.gspro.data.Player;
 public interface LaunchMonitor {
 
     /**
+     * Attempt to connect to the Launch Monitor.
+     * <p>
+     * When completed the monitor should notify the {@link Listener#onConnected()}.
+     */
+    void connect();
+
+    /**
+     * Attempt to disconnect from the launch monitor.
+     * <p>
+     * When completed the monitor should notify {@link Listener#onDisconnected()}.
+     */
+    void disconnect();
+
+    /**
      * Notify the launch monitor that the current player handedness or club has changed.  This is required for 
      * monitors that need to switch between full strike clubs and putting, such as:
      * <ul>
@@ -60,7 +74,17 @@ public interface LaunchMonitor {
      * 
      * @author kenjdavidson
      */
-    public static interface Listener {            
+    public static interface Listener {   
+        /**
+         * Called when the launch monitor is connected.
+         */
+        void onConnected();
+
+        /**
+         * Called when the launch monitor is disconnected.
+         */
+        void onDisconnected();
+
         /**
          * Update GS Pro when of a Player/Club change on from the Simulator.  At this point the GS Pro doesn't
          * seem to accept Club changes (nor Player, which makes sense as it's controlling the game) but at some

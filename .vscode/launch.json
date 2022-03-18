@@ -13,13 +13,6 @@
         },
         {
             "type": "java",
-            "name": "Launch GsProConnectSimulator",
-            "request": "launch",
-            "mainClass": "kjd.gspro.app.GsProConnectSimulator",
-            "projectName": "gspro-app"
-        },
-        {
-            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -29,7 +22,10 @@
             "name": "Launch GsProConnectApplicationBoot",
             "request": "launch",
             "mainClass": "kjd.gspro.app.GsProConnectApplicationBoot",
-            "projectName": "gspro-app"
+            "projectName": "gspro-app",
+            "args": [
+                "--debug"
+            ]
         }
     ]
 }

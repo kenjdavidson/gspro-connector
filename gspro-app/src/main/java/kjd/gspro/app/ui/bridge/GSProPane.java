@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import kjd.gspro.app.bridge.BridgeService;
+import kjd.gspro.app.bridge.GSProConnectService;
 import kjd.gspro.app.bridge.ConnectionStatus;
 import kjd.gspro.app.util.ConnectionButtonTextBinding;
 import kjd.gspro.app.util.PlayerClubBinding;
@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GSProPane implements Initializable {
 
-    BridgeService bridgeService;
+    GSProConnectService bridgeService;
 
     @FXML
     Button connectButton;
@@ -37,7 +37,7 @@ public class GSProPane implements Initializable {
     @FXML 
     Label clubLabel;
 
-    public GSProPane(BridgeService bridgeService) {
+    public GSProPane(GSProConnectService bridgeService) {
         log.debug("Initializing service");
         this.bridgeService = bridgeService;
     }
