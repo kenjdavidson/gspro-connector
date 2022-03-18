@@ -72,7 +72,10 @@ public class BridgeService implements ConnectionListener {
         try {
             connection.write(heartbeat);
         } catch (IOException e) {
+            connection.disconnect();
+
             publisher.publishEvent(new StatusEvent(this, Status.error(e, true)));
+            publisher.publishEvent(new ApplicationErrorEvent(this, "Error during communication with GS Pro", e));
         }
     }
 
@@ -109,6 +112,7 @@ public class BridgeService implements ConnectionListener {
     @Override
     public void onError(Status status, Throwable t) {
         log.error("Error during communication with GS Pro Connect", t);
+        
         publisher.publishEvent(new StatusEvent(this, status));
         publisher.publishEvent(new ApplicationErrorEvent(this, status.getMessage(), t));
     }

@@ -15,9 +15,25 @@ Api is defined at [GSPro Open Connect V1](https://gsprogolf.com/GSProConnectV1.h
 
 Client used to connect to and communicate with the [GSPro Open Connect V1](https://gsprogolf.com/GSProConnectV1.html).
 
+> DEPRECATED
+
+At this point the client is just an added layer which isn't needed.  I've left it in there (deprecated) incase it ends up getting used by something else.  But the same functionality has been implemented in the `gspro-app` project using FX properties to allow for status updates.
+
 ## GS Pro App
 
-Desktop application providing configuration and monitoring of the GS Pro Bridge adapters and processing.
+Java FX application (spring boot backed) providing the interface for the GS Pro and Launch Monitor management.  The application is pretty straight forward:
+
+### GS Pro / Launch Monitor
+
+![GS Pro/Launch Monitor](gspro-app/docs/gs-pro-launch-monitor.png)
+
+### Shot History
+
+![Shot History](gspro-app/docs/shot-history.png)
+
+### Debug Log
+
+![Debug Log](gspro-app/docs/debug-log.png)
 
 ## Contribution
 

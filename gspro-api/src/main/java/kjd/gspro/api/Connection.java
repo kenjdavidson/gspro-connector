@@ -41,9 +41,10 @@ public class Connection extends Thread {
 
     private String host;
     private Integer port;
-    private Socket socket;
-    private boolean connected;
+    private Socket socket;    
     private Optional<ConnectionListener> listener;
+
+    private volatile boolean connected;
     private volatile boolean cancelled;
 
     public Connection(ConnectionListener listener) {
@@ -141,9 +142,11 @@ public class Connection extends Thread {
         } catch(UnknownHostException e) {
             error("Unable to connect to GS Pro Connect Api host", e);
         } catch (IOException e) {
-            if (!cancelled) {
+            if (!cancelled && connected) {
                 error("Error during communication, dropping connection", e);
-            }            
+            } else if (!connected) {
+                error("Could not connect to GS Pro Connect API", e);
+            }
         } finally {     
             safeClose();
             
@@ -159,7 +162,7 @@ public class Connection extends Thread {
      * @throws UnknownHostException
      * @throws IOException
      */
-    void connect() throws UnknownHostException, IOException { 
+    protected void connect() throws UnknownHostException, IOException { 
         if (!connected) {
             socket = createSocket(host, port);        
             connected = true;

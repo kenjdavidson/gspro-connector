@@ -13,7 +13,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200.0" prefWidth="200.0" spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kjd.gspro.app.ui.bridge.GSProPane">
    <children>
-      <Label text="%gspro.title">
+      <Label text="%tab.gspro.title">
          <font>
             <Font size="14.0" />
          </font>
@@ -21,7 +21,7 @@
       <Separator prefWidth="200.0" />
       <Button fx:id="connectButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#toggleConnected" />
       <Separator prefWidth="200.0" />
-      <Label text="%gspro.currentPlayer" />
+      <Label text="%tab.gspro.currentPlayer" />
       <GridPane>
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -33,14 +33,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="%gspro.hand" />
+            <Label text="%tab.gspro.hand" />
             <Label fx:id="handLabel" GridPane.columnIndex="1" />
-            <Label text="%gspro.club" GridPane.rowIndex="1" />
+            <Label text="%tab.gspro.club" GridPane.rowIndex="1" />
             <Label fx:id="clubLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Separator prefWidth="200.0" />
-      <Button fx:id="heartbeatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendHeartbeat" text="%gspro.heartbeat" />
+      <Button fx:id="heartbeatButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendHeartbeat" text="%tab.gspro.heartbeat" />
    </children>
    <padding>
       <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

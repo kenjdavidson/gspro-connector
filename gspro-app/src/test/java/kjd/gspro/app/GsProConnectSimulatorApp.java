@@ -33,6 +33,13 @@ import kjd.gspro.data.Player;
  *      <ul>
  *  </li>
  * </ul>
+ * <p>
+ * I'm not entirely sure how GS Pro notifies of shutting down.  The documentation shows that the client
+ * will send continual heartbeats.  This includes a kind of reverse heartbeat that sends a basic
+ * Status saying that the device is still connected.  It uses the status 101 (connected) since it 
+ * doesn't make much sense to reply with a 200 (successful message).
+ * 
+ * @author kenjdavidson
  */
 public class GsProConnectSimulatorApp {
 
@@ -75,22 +82,24 @@ public class GsProConnectSimulatorApp {
 
         @Override
         public void run() {
-            try (final InputStream is = socket.getInputStream();
-                    final OutputStream os = socket.getOutputStream()) {
+            try (final InputStream is = socket.getInputStream()) {
 
-                sendPlayer(os);
+                sendPlayer();
 
-                while (true) {
+                while (!(socket.isClosed())) {
                     Optional<Request> request = readRequest(is);
-                    request.ifPresent(r -> {
-						try {
-							handleRequest(r, os);
-						} catch (JsonProcessingException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					});
+                    Status status = request.map(this::handleRequest).orElse(Status.ok());
+                    sendStatus(status);
+
+                    if (status.getCode() < 500) {
+                        sendPlayer();
+                    }
+
+                    try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// Ignore and continue
+					}
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -119,23 +128,26 @@ public class GsProConnectSimulatorApp {
             return Optional.empty();
         }
 
-        void handleRequest(Request request, OutputStream os) throws JsonProcessingException, IOException {
+        Status handleRequest(Request request) {
             count++;
 
             if (count % 5 == 0) {
-                os.write(Json.writeValue(Status.error(new Exception("Issue with request"), true)).getBytes());
-            } else {
-                os.write(Json.writeValue(Status.ok()).getBytes());
-                sendPlayer(os);
-            }
+                return Status.error(new Exception("Issue with request"), true);
+            } 
+
+            return Status.ok();
         }
 
-        void sendPlayer(OutputStream os) throws JsonProcessingException, IOException {
+        void sendPlayer() throws JsonProcessingException, IOException {
             Player player = players.poll();
             players.offer(player);
 
             Status status = Status.player(player);
-            os.write(Json.writeValue(status).getBytes());    
+            socket.getOutputStream().write(Json.writeValue(status).getBytes());    
+        }
+
+        void sendStatus(Status status) throws JsonProcessingException, IOException {
+            socket.getOutputStream().write(Json.writeValue(status).getBytes());
         }
 
         public void disconnect() {

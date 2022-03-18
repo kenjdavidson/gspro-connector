@@ -13,8 +13,8 @@
    <bottom>
       <HBox spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearHistory" text="%shothistory.clearHistory" />
-            <Button fx:id="exportButton" mnemonicParsing="false" onAction="#export" text="%shothistory.export" />
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearHistory" text="%tab.shothistory.clearHistory" />
+            <Button fx:id="exportButton" mnemonicParsing="false" onAction="#export" text="%tab.shothistory.export" />
          </children>
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

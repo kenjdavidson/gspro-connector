@@ -71,17 +71,17 @@
                <content>
                   <SplitPane disable="true" dividerPositions="0.265">
                     <items>
-                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="235.0">
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                            <children>
-                              <fx:include source="bridge/GSProPane.fxml" />
+                              <fx:include source="bridge/GSProPane.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="542.0" />
                     </items>
                   </SplitPane>
                </content>
           </Tab>
-            <Tab text="%tab.shotlog.title">
+            <Tab text="%tab.shothistory.title">
               <content>
                   <fx:include fx:id="shotHistoryPane" source="bridge/ShotHistoryPane.fxml" />
               </content>
@@ -98,10 +98,10 @@
       <ToolBar maxHeight="20.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" BorderPane.alignment="CENTER">
          <items>
             <Label fx:id="tbMonitorStatus" />
-            <Label text="%monitor.status" />
+            <Label text="%tab.monitor.status" />
             <Separator orientation="VERTICAL" />
             <Label fx:id="tbGsproStatus" />
-            <Label text="%gspro.status" />
+            <Label text="%tab.gspro.status" />
          </items>
       </ToolBar>
    </bottom>

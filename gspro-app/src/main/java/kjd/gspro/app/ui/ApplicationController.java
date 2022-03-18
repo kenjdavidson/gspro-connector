@@ -16,8 +16,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.controlsfx.dialog.Wizard;
 import kjd.gspro.app.ApplicationShutdownEvent;
 import kjd.gspro.app.bridge.BridgeService;
+import kjd.gspro.app.ui.about.AboutDialog;
 import kjd.gspro.app.util.ConnectionButtonTextBinding;
 import kjd.gspro.app.util.ConnectionStatusColourBinding;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +42,7 @@ public class ApplicationController implements Initializable, StageAware {
     // Toolbar, at some point break out
     @FXML Label tbGsproStatus;
     Circle gsproStatusIcon = new Circle(8);
-    
+
     @FXML Label tbMonitorStatus;
     Circle monitorStatusIcon = new Circle(8);
 
@@ -69,7 +71,7 @@ public class ApplicationController implements Initializable, StageAware {
 
     @FXML 
     public void onHelpAbout(ActionEvent event) {
-        
+        new AboutDialog().show();
     }
 
     @Override
