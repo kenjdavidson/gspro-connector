@@ -27,17 +27,42 @@ Java FX application (spring boot backed) providing the interface for the GS Pro 
 
 ![GS Pro/Launch Monitor](gspro-app/docs/gs-pro-launch-monitor.png)
 
+Select one of the launch monitors you have installed and click the **Connect** button.  Things should be relatively smooth after that point.
+
+- [ ] Implement the heartbeat thread to continually check on GS Pro
+- [ ] Start adding a couple sample launch monitors
+- [ ] Implement the Launch Monitor Properties screen
+
 ### Shot History
 
 ![Shot History](gspro-app/docs/shot-history.png)
+
+Provides the shot history.
+
+> This is not based on the shot actually being successful (just that it was attempted).  If it was a valid launch monitor shot and just wasn't picked up by GS Pro, you'll still want to be able to access  thtat data.
+
+- [ ] Add export functionality to the Shot History
 
 ### Debug Log
 
 ![Debug Log](gspro-app/docs/debug-log.png)
 
+Simple two directional logging, incase anything goes down and you need to look at what's up.
+
+- [ ] Add export functionality to debug log
+
 ## Contribution
 
-> Java development in vscode isn't the greatest.  You may need to refresh/restart the Java Language server a couple times to get things going. 
+Feel free to throw any suggestions or fixes my way:
+
+1. Fork
+2. Branch
+3. Develop (VSCode)
+4. Pull request
+
+Development is done within a `devcontainer` and hopefully keeps things super easy.   When building the `devcontainer` the post build step will run `mvn install -DskipTests`.  Once this is completed you'll most likely have to restart the Java Lanuage Server.
+
+> Java development and devcontainers seems to be a little finicky.  But once it's up with the Java Language server going, it's pretty slick.
 
 ## License
 
