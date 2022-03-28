@@ -58,7 +58,7 @@ public class ShotHistoryPane implements Initializable {
         shotTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
         TableColumn<Shot, Hand> handColumn = createColumn("Hand", value-> value.getValue().getHand());
-        TableColumn<Shot, Club> clubColumn = createColumn("Hand", value-> value.getValue().getClub());
+        TableColumn<Shot, Club> clubColumn = createColumn("Club", value-> value.getValue().getClub());
         TableColumn<Shot, Number> ballSpeedColumn = createColumn("Speed", value -> value.getValue().getBallSpeed());
         TableColumn<Shot, Number> spinAxisColumn = createColumn("Axis", value -> value.getValue().getSpinAxis());
         TableColumn<Shot, Number> totalSpinColumn = createColumn("Spin", value -> value.getValue().getTotalSpin());
@@ -91,7 +91,7 @@ public class ShotHistoryPane implements Initializable {
             attackAngleColumn,
             faceAngleColumn);
 
-        shotTable.getColumns().addAll(ballColumns, clubColumns);
+        shotTable.getColumns().addAll(playerColumns, ballColumns, clubColumns);
     }
 
     <T> TableColumn<Shot, T> createColumn(String title, 

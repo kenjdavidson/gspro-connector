@@ -56,8 +56,8 @@ public class RequestBuilder {
                 .ballData(ballData != null)
                 .clubData(clubData != null)
                 .heartBeat(false)
-                .monitorReady(false)
-                .ballData(false)
+                .monitorReady(true)
+                .monitorBallDetected(true)
                 .build()
             )
             .build();

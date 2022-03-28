@@ -116,11 +116,36 @@ public class GSProConnectService implements ConnectionListener {
 
     @EventListener
     public void onLaunchMonitorReady(LaunchMonitorReadyStateEvent event) {
+        if (connection != null && connection.isConnected()) {            
+            try {
+                log.debug("Connection available, sending monitor state event");
 
+                Request request = requestBuilder.heartbeat(event.getMonitorReady(), event.getBallDetected()); 
+                connection.write(request);
+                publisher.publishEvent(new GSProRequestEvent(this, request));
+            } catch (IOException e) {
+                log.error("Error while sending shot event to GS Pro", e);
+            }            
+        } else {
+            log.debug("No connection available, ignoring shot event");
+        }  
     }
 
     @EventListener 
     public void onLaunchMonitorShot(LaunchMonitorShotEvent event) {
-        publisher.publishEvent(new GSProShotEvent(this, player.get(), event.getBallData(), event.getClubData()));
+        if (connection != null && connection.isConnected()) {            
+            try {
+                log.debug("Connection available, sending shot event");
+
+                Request request = requestBuilder.shot(event.getBallData(), event.getClubData()); 
+                connection.write(request);
+                publisher.publishEvent(new GSProShotEvent(this, player.get(), event.getBallData(), event.getClubData()));
+                publisher.publishEvent(new GSProRequestEvent(this, request));
+            } catch (IOException e) {
+                log.error("Error while sending shot event to GS Pro", e);
+            }            
+        } else {
+            log.debug("No connection available, ignoring shot event");
+        }     
     }
 }

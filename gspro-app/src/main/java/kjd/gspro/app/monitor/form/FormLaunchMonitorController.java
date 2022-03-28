@@ -65,7 +65,7 @@ public class FormLaunchMonitorController implements LaunchMonitorController, Ini
         monitorReadyButton.setOnAction(this::onMonitorReady);
         ballDetectedButton.disableProperty().bind(launchMonitor.isNull());
         ballDetectedButton.setOnAction(this::onBallDetected);
-        hitShotButton.disableProperty().bind(launchMonitor.isNull());
+        hitShotButton.disableProperty().bind(launchMonitor.isNull());        
         hitShotButton.setOnAction(this::onHitShot);
 
         driverPreset.setOnAction(e -> setValues(FormLaunchPreset.DRIVER));

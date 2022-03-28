@@ -31,6 +31,11 @@ public class Shot {
     }
 
     public Shot(Player player, BallData ballData, ClubData clubData) {
+        if (player != null) {
+            hand.setValue(player.getHanded());
+            club.setValue(player.getClub());
+        }
+
         ballSpeed.setValue(ballData.getSpeed());
         spinAxis.setValue(ballData.getSpinAxis());
         totalSpin.setValue(ballData.getTotalSpin());

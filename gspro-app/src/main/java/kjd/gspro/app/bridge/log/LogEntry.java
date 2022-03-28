@@ -1,4 +1,4 @@
-package kjd.gspro.app.bridge;
+package kjd.gspro.app.bridge.log;
 
 import java.time.LocalDateTime;
 

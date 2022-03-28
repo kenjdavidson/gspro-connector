@@ -44,7 +44,8 @@ public class FormLaunchMonitor implements LaunchMonitor {
      */
 	@Override
 	public void connect() {
-        Optional.of(listener.get()).ifPresent(l -> l.onConnected());
+        Optional.ofNullable(listener.get())
+            .ifPresent(l -> l.onConnected());
 	}
     
     /**
@@ -52,14 +53,17 @@ public class FormLaunchMonitor implements LaunchMonitor {
      */
 	@Override
 	public void disconnect() {
-        Optional.of(listener.get()).ifPresent(l -> l.onDisconnected());
+        Optional.ofNullable(listener.get())
+            .ifPresent(l -> l.onDisconnected());
 	}
     
     public void sendShot(BallData ballData, ClubData clubData) {
-        Optional.of(listener.get()).ifPresent(l -> l.onShot(ballData, clubData));
+        Optional.ofNullable(listener.get())
+            .ifPresent(l -> l.onShot(ballData, clubData));
     }
 
     public void monitorReady(boolean ready, boolean ballDetected) {
-        Optional.of(listener.get()).ifPresent(l -> l.onReadyStateChange(ready, ballDetected));
+        Optional.ofNullable(listener.get())
+            .ifPresent(l -> l.onReadyStateChange(ready, ballDetected));
     }
 }

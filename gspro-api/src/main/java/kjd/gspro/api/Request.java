@@ -56,7 +56,7 @@ public class Request {
 
     @NonNull
     @JsonProperty("ShotDataOptions")
-    private Options shotDataOptions;
+    private Options shotDataOptions = new Options();;
 
     public void setBallData(BallData data) {
         this.ballData = data;
