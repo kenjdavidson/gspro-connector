@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import kjd.gspro.api.Status;
 import kjd.gspro.app.bridge.StatusEvent;
 import kjd.gspro.app.bridge.gspro.GSProRequestEvent;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogService {
 
-    final StatusLogconverter statusConverter;
+    final StatusLogConverter statusConverter;
     final RequestLogConverter requestConverter;
 
     @Getter
