@@ -4,13 +4,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kjd.gspro.app.ui.bridge.LaunchMonitorPane">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kjd.gspro.app.ui.bridge.LaunchMonitorPane">
    <children>
       <Label text="%tab.monitor.title">
          <font>
@@ -21,11 +22,16 @@
       <HBox spacing="8.0">
          <children>
             <ComboBox fx:id="launchMonitorSelect" prefWidth="300.0" />
-            <Button fx:id="launchMonitorConfigButton" mnemonicParsing="false" onAction="#configureLaunchMonitor" />
+            <Button fx:id="configureButton" mnemonicParsing="false" onAction="#configureLaunchMonitor" />
             <Button fx:id="connectButton" mnemonicParsing="false" onAction="#toggleConnection" text="%app.connect" />
          </children>
       </HBox>
       <Separator prefWidth="200.0" />
+      <ScrollPane fx:id="launchMonitorPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+        <content>
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+        </content>
+      </ScrollPane>
    </children>
    <padding>
       <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

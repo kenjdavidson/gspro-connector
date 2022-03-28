@@ -1,8 +1,9 @@
-package kjd.gspro.app.bridge;
+package kjd.gspro.app.bridge.gspro;
 
 import java.io.IOException;
 
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javafx.application.Platform;
@@ -14,32 +15,28 @@ import kjd.gspro.api.Request;
 import kjd.gspro.api.RequestBuilder;
 import kjd.gspro.api.Status;
 import kjd.gspro.app.ApplicationErrorEvent;
+import kjd.gspro.app.bridge.ConnectionStatus;
+import kjd.gspro.app.bridge.StatusEvent;
+import kjd.gspro.app.bridge.monitor.LaunchMonitorReadyStateEvent;
+import kjd.gspro.app.bridge.monitor.LaunchMonitorShotEvent;
 import kjd.gspro.data.Player;
 import kjd.gspro.data.Units;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@RequiredArgsConstructor
 @Component
 @Slf4j
 public class GSProConnectService implements ConnectionListener {
 
-    ApplicationEventPublisher publisher;
+    final ApplicationEventPublisher publisher;
 
-    @Getter
-    ObjectProperty<ConnectionStatus> connectionStatus;
-
-    @Getter
-    ObjectProperty<Player> player;
+    @Getter ObjectProperty<ConnectionStatus> connectionStatus = new SimpleObjectProperty<>(this, "gsproConnected", ConnectionStatus.DISCONNECTED);;
+    @Getter ObjectProperty<Player> player = new SimpleObjectProperty<>(this, "player");;
 
     Connection connection;
     RequestBuilder requestBuilder;
-
-    public GSProConnectService(ApplicationEventPublisher publisher) {
-        this.publisher = publisher;
-
-        connectionStatus = new SimpleObjectProperty<>(this, "gsproConnected", ConnectionStatus.DISCONNECTED);
-        player = new SimpleObjectProperty<>(this, "player");
-    }
 
     public void connect() {
         if (connection == null || !connection.isConnected()) {
@@ -81,7 +78,7 @@ public class GSProConnectService implements ConnectionListener {
 
     @Override
     public void onConnected(Status status) {
-        log.info("Connection connected");        
+        log.info("Successfully connected to GS Pro Connector API");        
         Platform.runLater(() ->connectionStatus.setValue(ConnectionStatus.CONNECTED));
 
         publisher.publishEvent(new StatusEvent(this, status));        
@@ -103,7 +100,7 @@ public class GSProConnectService implements ConnectionListener {
 
     @Override
     public void onDisconnect(Status status) {
-        log.info("Connection disconnected");        
+        log.info("Disconnected from GS Pro Connector API");        
         Platform.runLater(() ->connectionStatus.setValue(ConnectionStatus.DISCONNECTED));
 
         publisher.publishEvent(new StatusEvent(this, status));        
@@ -117,4 +114,13 @@ public class GSProConnectService implements ConnectionListener {
         publisher.publishEvent(new ApplicationErrorEvent(this, status.getMessage(), t));
     }
 
+    @EventListener
+    public void onLaunchMonitorReady(LaunchMonitorReadyStateEvent event) {
+
+    }
+
+    @EventListener 
+    public void onLaunchMonitorShot(LaunchMonitorShotEvent event) {
+        publisher.publishEvent(new GSProShotEvent(this, player.get(), event.getBallData(), event.getClubData()));
+    }
 }

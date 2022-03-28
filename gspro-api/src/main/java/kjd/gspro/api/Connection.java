@@ -79,9 +79,7 @@ public class Connection extends Thread {
     public void disconnect() {
         this.cancelled = true;
 
-        safeClose();
-        
-        this.connected = false;
+        safeClose();        
     }
 
     @Synchronized("$CONNECTION_LOCK")

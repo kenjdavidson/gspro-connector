@@ -11,8 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import kjd.gspro.app.bridge.GSProConnectService;
 import kjd.gspro.app.bridge.ConnectionStatus;
+import kjd.gspro.app.bridge.gspro.GSProConnectService;
+import kjd.gspro.app.util.ConnectionButtonDisableBinding;
 import kjd.gspro.app.util.ConnectionButtonTextBinding;
 import kjd.gspro.app.util.PlayerClubBinding;
 import kjd.gspro.app.util.PlayerHandBinding;
@@ -45,7 +46,7 @@ public class GSProPane implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle rb) {        
         connectButton.textProperty().bind(new ConnectionButtonTextBinding(bridgeService.getConnectionStatus(), rb));        
-        connectButton.disableProperty().bind(bridgeService.getConnectionStatus().isEqualTo(ConnectionStatus.CONNECTING));
+        connectButton.disableProperty().bind(new ConnectionButtonDisableBinding(bridgeService.getConnectionStatus()));
 
         heartbeatButton.disableProperty().bind(bridgeService.getConnectionStatus().isNotEqualTo(ConnectionStatus.CONNECTED));
 

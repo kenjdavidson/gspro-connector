@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kjd.gspro.app.monitor.form.FormLaunchMonitor">
+   <center>
+      <VBox maxWidth="400.0" prefWidth="400.0" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Ball Data">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Ball Speed (mph)" />
+                  <Label text="Spin Axis" GridPane.rowIndex="1" />
+                  <Label text="Total Spin" GridPane.rowIndex="2" />
+                  <Label text="Launch Angle" GridPane.rowIndex="3" />
+                  <Label text="Launch Direction" GridPane.rowIndex="4" />
+                  <Label text="Carry Distance (yards)" GridPane.rowIndex="5" />
+                  <Slider fx:id="ballLaunchDirection" majorTickUnit="2.0" max="10.0" min="-10.0" minorTickCount="1" showTickLabels="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Slider fx:id="ballLaunchAngle" majorTickUnit="1.0" max="25.0" min="5.0" minorTickCount="1" showTickLabels="true" snapToTicks="true" value="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Slider fx:id="ballTotalSpin" majorTickUnit="1000.0" max="12000.0" min="1500.0" minorTickCount="2" showTickLabels="true" value="2000.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Slider fx:id="ballSpinAxis" majorTickUnit="10.0" max="90.0" min="-90.0" minorTickCount="5" showTickLabels="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Slider fx:id="ballCarryDistance" max="350.0" min="60.0" minorTickCount="5" showTickLabels="true" value="260.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Slider fx:id="ballSpeed" majorTickUnit="10.0" max="200.0" min="60.0" minorTickCount="5" showTickLabels="true" value="140.0" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <Separator prefWidth="200.0" />
+            <Label text="Club Data">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Club Speed" />
+                  <Label text="Attack Angle" GridPane.rowIndex="1" />
+                  <Label text="Face Angle" GridPane.rowIndex="2" />
+                  <Slider fx:id="clubFaceAngle" majorTickUnit="1.0" max="5.0" min="-5.0" minorTickCount="1" showTickLabels="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Slider fx:id="clubAttackAngle" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="-10.0" minorTickCount="1" showTickLabels="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Slider fx:id="clubSpeed" majorTickUnit="10.0" max="130.0" min="60.0" minorTickCount="5" showTickLabels="true" value="100.0" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </VBox>
+   </center>
+   <right>
+      <GridPane hgap="2.0" maxWidth="100.0" vgap="2.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="driverPreset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="DR" GridPane.columnSpan="2" />
+            <Button fx:id="wood3Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="3W" GridPane.rowIndex="1" />
+            <Button fx:id="wood5Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="5W" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="iron4Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="4I" GridPane.rowIndex="2" />
+            <Button fx:id="iron5Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="5I" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="iron6Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="6I" GridPane.rowIndex="3" />
+            <Button fx:id="iron7Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="7I" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="iron8Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="8I" GridPane.rowIndex="4" />
+            <Button fx:id="iron9Preset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="9I" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="pwPreset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="PW" GridPane.rowIndex="5" />
+            <Button fx:id="gwPreset" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="GW" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </GridPane>
+   </right>
+   <top>
+      <HBox spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToggleButton fx:id="monitorReadyButton" mnemonicParsing="false" onAction="#onMonitorRedy" text="Monitor Ready" />
+            <ToggleButton fx:id="ballDetectedButton" mnemonicParsing="false" onAction="#onBallDetected" text="Ball Detected" />
+            <Button fx:id="hitShotButton" mnemonicParsing="false" onAction="#onHitShot" text="HIT SHOT!" />
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </HBox>
+   </top>
+</BorderPane>

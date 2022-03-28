@@ -18,7 +18,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.controlsfx.dialog.Wizard;
 import kjd.gspro.app.ApplicationShutdownEvent;
-import kjd.gspro.app.bridge.GSProConnectService;
+import kjd.gspro.app.bridge.gspro.GSProConnectService;
+import kjd.gspro.app.bridge.monitor.LaunchMonitorService;
 import kjd.gspro.app.ui.about.AboutDialog;
 import kjd.gspro.app.util.ConnectionButtonTextBinding;
 import kjd.gspro.app.util.ConnectionStatusColourBinding;
@@ -31,6 +32,7 @@ public class ApplicationController implements Initializable, StageAware {
 
     ApplicationEventPublisher publisher;
     GSProConnectService bridgeService;
+    LaunchMonitorService launchMonitorService;
 
     @FXML BorderPane layout;
 
@@ -48,10 +50,13 @@ public class ApplicationController implements Initializable, StageAware {
 
     SimpleObjectProperty<Stage> stage = new SimpleObjectProperty<>();
 
-    public ApplicationController(ApplicationEventPublisher publisher, GSProConnectService bridgeService) {
+    public ApplicationController(ApplicationEventPublisher publisher, 
+                                    GSProConnectService bridgeService,
+                                    LaunchMonitorService launchMonitorService) {
         log.debug("Initializing application controller");
         this.publisher = publisher;
         this.bridgeService = bridgeService;
+        this.launchMonitorService = launchMonitorService;
     }
 
     @Override
@@ -62,6 +67,7 @@ public class ApplicationController implements Initializable, StageAware {
         tbMonitorStatus.setGraphic(monitorStatusIcon);
 
         gsproStatusIcon.fillProperty().bind(new ConnectionStatusColourBinding(bridgeService.getConnectionStatus(), rb));             
+        monitorStatusIcon.fillProperty().bind(new ConnectionStatusColourBinding(launchMonitorService.getConnectionStatus(), rb));
     }
 
     @FXML

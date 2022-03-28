@@ -1,13 +1,19 @@
-package kjd.gspro.app.bridge;
+package kjd.gspro.app.bridge.shot;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import kjd.gspro.data.BallData;
+import kjd.gspro.data.Club;
 import kjd.gspro.data.ClubData;
+import kjd.gspro.data.Hand;
+import kjd.gspro.data.Player;
 import lombok.Getter;
 
 @Getter
 public class Shot {
+    private Property<Hand> hand = new SimpleObjectProperty<>(this, "hand");
+    private Property<Club> club = new SimpleObjectProperty<>(this, "club");
     private Property<Number> ballSpeed = new SimpleFloatProperty(this, "ballSpeed");
     private Property<Number> spinAxis = new SimpleFloatProperty(this, "spinAxis");
     private Property<Number> totalSpin = new SimpleFloatProperty(this, "totalSpin");
@@ -20,11 +26,11 @@ public class Shot {
     private Property<Number> attackAngle = new SimpleFloatProperty(this, "attackAngle");
     private Property<Number> faceAngle = new SimpleFloatProperty(this, "faceAngle");
 
-    public Shot(BallData ballData) {
-        this(ballData, null);
+    public Shot(Player player, BallData ballData) {
+        this(player, ballData, null);
     }
 
-    public Shot(BallData ballData, ClubData clubData) {
+    public Shot(Player player, BallData ballData, ClubData clubData) {
         ballSpeed.setValue(ballData.getSpeed());
         spinAxis.setValue(ballData.getSpinAxis());
         totalSpin.setValue(ballData.getTotalSpin());

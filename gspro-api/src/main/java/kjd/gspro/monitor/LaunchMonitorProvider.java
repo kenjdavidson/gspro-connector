@@ -1,6 +1,8 @@
 package kjd.gspro.monitor;
 
+import java.net.URL;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Properties;
 
 /**
@@ -10,6 +12,14 @@ import java.util.Properties;
  * @author kenjdavidson
  */
 public interface LaunchMonitorProvider {
+
+    /**
+     * Return a (hopefully) unique ID in the context of available launch monitor
+     * plugins.
+     * 
+     * @return
+     */
+    String getId();
 
     /**
      * Create a {@link LaunchMonitor}.
@@ -43,5 +53,13 @@ public interface LaunchMonitorProvider {
      * @return
      */
     Properties getDefaultProperties();
+
+    /**
+     * Return an FXML View Resource URL.  If this is provided (optional) then it will
+     * be loaded.  If not, then the standard screen will be displayed to the user.
+     * 
+     * @return
+     */
+    Optional<URL> getLaunchMonitorViewUrl();
 
 }
