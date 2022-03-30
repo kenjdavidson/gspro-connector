@@ -74,17 +74,19 @@ public class ConnectionTest {
     }
 
     @Test
-    public void isConnected_disconnected() throws UnknownHostException, IOException {
+    public void isConnected_disconnected() throws UnknownHostException, IOException, InterruptedException {
         Socket socket = mock(Socket.class);                
 
         doReturn(socket).when(connection).createSocket(HOST, PORT);
         doReturn(mock(OutputStream.class)).when(socket).getOutputStream();
         doReturn(mock(InputStream.class)).when(socket).getInputStream();
 
-        connection.connect();
+        connection.start();
         connection.disconnect();
+        connection.join();
 
-        assertFalse(connection.isConnected());        
+        verify(listener, times(1)).onConnected(Status.connected());
+        verify(listener, times(1)).onDisconnect(Status.disconnected());
     }
 
     @Test 
@@ -97,7 +99,7 @@ public class ConnectionTest {
 
         connection.connect();
 
-        verify(listener, times(1)).onStatus(Status.connected());
+        verify(listener, times(1)).onConnected(Status.connected());
     }
 
     @Test(expected = UnknownHostException.class)

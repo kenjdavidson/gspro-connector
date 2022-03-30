@@ -128,8 +128,8 @@ public class FormLaunchMonitorController implements LaunchMonitorController, Ini
             .speed((float) ballSpeed.getValue())
             .spinAxis((float) ballSpinAxis.getValue())
             .totalSpin((float) ballTotalSpin.getValue())
-            .hla((float) ballLaunchAngle.getValue())
-            .vla((float) ballLaunchDirection.getValue())
+            .hla((float) ballLaunchDirection.getValue())
+            .vla((float) ballLaunchAngle.getValue())
             .carryDistance((float) ballCarryDistance.getValue())
             .build();
     }
