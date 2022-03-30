@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>gspro-connector</artifactId>
+    <groupId>kjd.gspro</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>kjd.gspro</groupId>
+  <artifactId>gspro-garmin</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>gspro-garmin</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <fxcontrols-version>11.1.1</fxcontrols-version>
+		<javafx-version>11.0.2</javafx-version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>kjd.gspro</groupId>
+      <artifactId>gspro-api</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>${fxcontrols-version}</version>
+      <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>${javafx-version}</version>
+      <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>${javafx-version}</version>
+      <scope>provided</scope>
+		</dependency>    
+  </dependencies>
+
+  <build>
+  </build>
+</project>
