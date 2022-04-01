@@ -4,6 +4,7 @@ public enum Type {
     HANDSHAKE("Hanshake"),
     CHALLENGE("Challenge"),
     DISCONNECT("Disconnect"),
+    PING("Ping"),
     PONG("Pong"),
     CLUB_TYPE("SetClubType"),
     BALL_TYPE("SetBallType"),

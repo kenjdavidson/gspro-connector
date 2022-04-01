@@ -18,9 +18,17 @@
   <properties>
     <fxcontrols-version>11.1.1</fxcontrols-version>
 		<javafx-version>11.0.2</javafx-version>
+    <commons-config-version>2.7</commons-config-version>
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-configuration2</artifactId>
+      <version>${commons-config-version}</version>
+    </dependency>
+
     <dependency>
       <groupId>kjd.gspro</groupId>
       <artifactId>gspro-api</artifactId>
