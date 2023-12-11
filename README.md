@@ -2,7 +2,9 @@
 
 Java implementation for communication between launch monitor(s) and the GS Pro software.
 
-> At this point this is just a playground for JavaFX and Spring, playing around with the idea of getting my Tittle X Play working with GS Pro so I can give it a go.
+> At this point this is just a playground for JavaFX and Spring, playing around with the idea of getting my SLX working with GS Pro so I can give it a go.
+
+> Couldn't end up reverse engineering the Bluetooth communication from the SLX/Tittle devices.  In the mean time, the guys at SLX released the [SLX Connect](https://slx.ulike.co.kr/link.html?appupdate_pc) GSPro integration, which works reasonably well, so this project is not being deprecated.  It was still a pretty fun project to get some Spring/JavaFX experience under my belt.
 
 ## GS Pro Api
 
